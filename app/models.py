@@ -9,6 +9,7 @@ class Host(User):
         verbose_name_plural = "Propietario de Inmueble"
 
 
+
 class City(models.Model):
     name = models.CharField(max_length=50)
 
