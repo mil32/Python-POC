@@ -2,11 +2,11 @@
 {% block content %}
 
 
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <div class="col-sm-4">
             <img src="sarasa.jpg" height="100px" width="100px"> <br>
-            Property ONE
+            Property ONE {{properties}}
         </div>
         <div class="col-sm-4">
             <img src="sarasa.jpg" height="100px" width="100px"> <br>
@@ -30,6 +30,24 @@
             <img src="sarasa.jpg" height="100px" width="100px"> <br>
             Property SIX
         </div>
+    </div>
+</div> -->
+
+<div class="container">
+    <div class="row">
+        {% for property in properties %}
+        <div class="col-sm-4">
+            <!-- <img src="{{STATIC_URL}}mdphouse.jpg" height="100px" width="100px"> <br> -->
+            {% if property.image %}
+            <img src="{{property.image.url}}"/>
+            {% endif %}
+            <h3>{{property.title}}</h3>
+            <h5><strong>Ciudad: </strong> {{property.city}}</h5>
+            <h5><strong>Direccion: </strong> {{property.address}}</h5>
+            <h5><strong>Capacidad: </strong> {{property.max_pax}} Personas</h5>
+            <h4><strong>Precio: </strong> {{property.price}} P/Mes</h4>
+        </div>
+        {% endfor %}
     </div>
 </div>
 

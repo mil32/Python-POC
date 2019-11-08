@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from app.models import Property
+from pprint import pprint
 
 
 def index(request):
-    test = "TU VIEJA"
+    properties = Property.objects.all()
     context = {
-        'variable': test,
+        'properties' : properties,
     }
     return render(request, 'app/index.html', context)
 
