@@ -1,45 +1,84 @@
 {% extends "app/base.html" %}
 {% block content %}
 
+<script>
+    function filter() {
+        option = document.getElementById('typeFilter').value;
+        if (option == 'all'){
+            hideAll();
+        }else if(option == 'city'){
+            hideAll();
+            document.getElementById('filterCities').removeAttribute('hidden');
+        }else if(option == 'max_pax'){
+            hideAll();
+            document.getElementById('filterCapacity').removeAttribute('hidden');
+        }else if(option == 'price'){
+            hideAll();
+            document.getElementById('filterPrice').removeAttribute('hidden');
+        }else{
+            Error('something wrong');
+        }
+    }
 
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <img src="sarasa.jpg" height="100px" width="100px"> <br>
-            Property ONE {{properties}}
-        </div>
-        <div class="col-sm-4">
-            <img src="sarasa.jpg" height="100px" width="100px"> <br>
-            Property TWO
-        </div>
-        <div class="col-sm-4">
-            <img src="sarasa.jpg" height="100px" width="100px"> <br>
-            Property THREE
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <img src="sarasa.jpg" height="100px" width="100px"> <br>
-            Property FOUR
-        </div>
-        <div class="col-sm-4">
-            <img src="sarasa.jpg" height="100px" width="100px"> <br>
-            Property FIVE
-        </div>
-        <div class="col-sm-4">
-            <img src="sarasa.jpg" height="100px" width="100px"> <br>
-            Property SIX
-        </div>
-    </div>
-</div> -->
+    function hideAll(){
+        document.getElementById('filterCapacity').setAttribute('hidden','true');
+        document.getElementById('filterPrice').setAttribute('hidden','true');
+        document.getElementById('filterCities').setAttribute('hidden','true');
+    }
 
+
+</script>
+
+
+<br><br>
 <div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            Buscar:
+        </div>
+
+        <div class="col-sm-4">
+            <label for="filter">Filtro: </label>
+            <select name="filter"  id="typeFilter" onchange="filter()">
+                <option value="all" selected > Todos </option>
+                <option value="city" > Ciudad </option>
+                <option value="max_pax" > Capacidad </option>
+                <option value="price" > Precio</option>
+            </select>
+        </div>
+
+        <div class="col-sm-4" id="filterCities" hidden>
+            <label for="cities">Ciudad: </label>
+            <select name="cities" id="selectFilterCities">
+                {% for city in cities %}
+                <option value="{{city.name}}">{{city.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-sm-4" id="filterPrice" hidden>
+            <label for="price_from">Desde</label>
+            <input type="number" name="price_from" style="width: 60px;">
+            <label for="price_to">Hasta</label>
+            <input type="number" name="price_to" style="width: 60px;">
+        </div>
+
+        <div class="col-sm-4" id="filterCapacity" hidden>
+            <label for="max_pax">Capacidad</label>
+            <input type="number" name="max_pax" style="width: 120px;">
+        </div>
+
+        <div class="col-sm-2">
+            <button class="btn btn-success" onclick="filter()">Buscar</button>
+        </div>
+    </div>
+    <br><br>
     <div class="row">
         {% for property in properties %}
         <div class="col-sm-4">
             <!-- <img src="{{STATIC_URL}}mdphouse.jpg" height="100px" width="100px"> <br> -->
             {% if property.image %}
-            <img src="{{property.image.url}}"/>
+            <img src="{{property.image.url}}" />
             {% endif %}
             <h3>{{property.title}}</h3>
             <h5><strong>Ciudad: </strong> {{property.city}}</h5>
