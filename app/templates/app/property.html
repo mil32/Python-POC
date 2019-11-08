@@ -1,0 +1,9 @@
+{% extends "app/base.html" %} {% block content %}
+<h1>{{ property.title }}</h1>
+Capacidad: {{ property.max_pax }} personas.<br />
+Precio por noche: $ {{ property.price }}.<br />
+imagen: {{ property.image }}.<br />
+Ubicacion: {{ property.address }}. | {{ property.city }}<br />
+Descricion: {{ property.description }}<br />
+
+{% endblock %}
