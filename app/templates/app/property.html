@@ -1,1 +1,22 @@
-<h1>{{variable}}</h1>
+{% extends "app/base.html" %} {% block content %}
+<h1>{{ property.title }}</h1>
+Capacidad: {{ property.max_pax }} personas.<br />
+Precio por noche: $ {{ property.price }}.<br />
+imagen: {{ property.image }}.<br />
+Ubicacion: {{ property.address }}. | {{ property.city }}<br />
+Descricion: {{ property.description }}<br />
+
+<hr />
+<h3>Hace tu Reserva!</h3>
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="date" name="start_date" />
+  <input type="date" name="end_date" />
+  <input type="text" name="guest" placeholder="Nombre" />
+  <button type="submit">RESERVAR</button>
+</form>
+<hr />
+
+{% if guest != none %}
+<h2>{{ guest }}</h2>
+{% endif %} {% endblock %}
