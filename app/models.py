@@ -9,6 +9,7 @@ class Host(User):
         verbose_name_plural = "Propietario de Inmueble"
 
 
+
 class City(models.Model):
     name = models.CharField(max_length=50)
 
@@ -21,7 +22,7 @@ class Property(models.Model):
     price = models.IntegerField()
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
-    image = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="properties", null=True)
     address = models.CharField(max_length=50)
     description = models.CharField(max_length=100)
 
