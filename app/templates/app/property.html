@@ -6,4 +6,17 @@ imagen: {{ property.image }}.<br />
 Ubicacion: {{ property.address }}. | {{ property.city }}<br />
 Descricion: {{ property.description }}<br />
 
-{% endblock %}
+<hr />
+<h3>Hace tu Reserva!</h3>
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="date" name="start_date" />
+  <input type="date" name="end_date" />
+  <input type="text" name="guest" placeholder="Nombre" />
+  <button type="submit">RESERVAR</button>
+</form>
+<hr />
+
+{% if guest != none %}
+<h2>{{ guest }}</h2>
+{% endif %} {% endblock %}
