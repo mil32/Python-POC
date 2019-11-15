@@ -9,7 +9,6 @@ class Host(User):
         verbose_name_plural = "Propietario de Inmueble"
 
 
-
 class City(models.Model):
     name = models.CharField(max_length=50)
 
@@ -39,5 +38,3 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.guest
-
-
