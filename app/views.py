@@ -45,8 +45,8 @@ def property(request, property_id):
 
             for booking in bookings:
                 if (
-                        booking.start_date < start_date < booking.end_date or booking.start_date < end_date < booking.end_date) or (
-                        start_date < booking.start_date and end_date > booking.end_date):
+                        booking.start_date <= start_date <= booking.end_date or booking.start_date <= end_date <= booking.end_date) or (
+                        start_date <= booking.start_date and end_date >= booking.end_date):
                     checker = False
                 else:
                     checker = True
@@ -54,13 +54,14 @@ def property(request, property_id):
             checker = True
 
         if checker:
-            p = Booking(property=prop, start_date=start_date, end_date=end_date, price=price, guest=guest)
+            p = Booking(property=prop, start_date=start_date,
+                        end_date=end_date, price=price, guest=guest)
             p.save()
 
     context = {
         'property': prop,
         'checker': checker,
-        'guest': guest,
+        'guest': checker,
     }
 
     return render(request, 'app/property.html', context)
