@@ -28,7 +28,7 @@ def index(request):
 
 def property(request, property_id):
     prop = Property.objects.get(id=property_id)
-    bookings = Booking.objects.all()
+    bookings = Booking.objects.filter(property= property_id)
     checker = None
     guest = None
 
