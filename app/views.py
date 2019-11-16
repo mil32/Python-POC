@@ -27,10 +27,9 @@ def index(request):
 
 
 def property(request, property_id):
-    # guest = request.POST.get('guest')
     prop = Property.objects.get(id=property_id)
     bookings = Booking.objects.all()
-    checker = False
+    checker = None
     guest = None
 
     if request.method == 'POST':
@@ -42,7 +41,6 @@ def property(request, property_id):
         price = prop.price * (end_date - start_date).days * 1.08
 
         if len(bookings) > 0:
-
             for booking in bookings:
                 if (
                         booking.start_date <= start_date <= booking.end_date or booking.start_date <= end_date <= booking.end_date) or (
@@ -61,7 +59,7 @@ def property(request, property_id):
     context = {
         'property': prop,
         'checker': checker,
-        'guest': checker,
+        'guest': guest,
     }
 
     return render(request, 'app/property.html', context)

@@ -1,66 +1,68 @@
-{% extends "app/base.html" %}
-{% block content %}
+{% extends "app/base.html" %} {% block content %}
 
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <h2 class="text-center">Buscar:{{test}}</h2>
-        </div>
-    </div>
-    <br>
-    <form action="" method="POST" >{% csrf_token %}
-    <div class="row">
+<div class="heroSearch">
+  <div class="searchForm">
+    <form action="" class="formgrid" method="POST">
+      {% csrf_token %}
+      <div id="filterCities">
+        <label for="cities">Ciudad: </label>
+        <select name="cities" id="selectFilterCities">
+          {% for city in cities %}
+          <option value="{{city.id}}">{{city.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filterCapacity">
+        <input
+          type="number"
+          name="max_pax"
+          style="width: 120px;"
+          placeholder="Personas"
+        />
+      </div>
 
-        <div class="col-sm-4" id="filterCities">
-            <label for="cities">Ciudad: </label>
-            <select name="cities" id="selectFilterCities">
-                {% for city in cities %}
-                <option value="{{city.id}}">{{city.name}}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <div class="col-sm-1">
-            Precio:
-        </div>
-
-        <div class="col-sm-3" id="filterPrice">
-            <label for="price_from">Desde</label>
-            <input type="number" name="price_from" style="width: 60px;">
-            <label for="price_to">Hasta</label>
-            <input type="number" name="price_to" style="width: 60px;">
-        </div>
-
-        <div class="col-sm-4" id="filterCapacity">
-            <label for="max_pax">Capacidad</label>
-            <input type="number" name="max_pax" style="width: 120px;">
-        </div>
-
-        <div class="col-sm-2">
-            <button class="btn btn-success" type="submit">Buscar</button>
-        </div>
-    </div>
-</form>
-    <br><br>
-    <div class="row">
-        {% for property in properties %}
-        <div class="col-sm-4">
-            {% if property.image %}
-            <img src="{{property.image.url}}" />
-            {% endif %}
-            <h3>{{property.title}}</h3>
-            <h5><strong>Ciudad: </strong> {{property.city}}</h5>
-            <h5><strong>Direccion: </strong> {{property.address}}</h5>
-            <h5><strong>Capacidad: </strong> {{property.max_pax}} Personas</h5>
-            <h4><strong>Precio: </strong> {{property.price}} P/Mes</h4>
-        </div>
-        {% endfor %}
-    </div>
+      <div class="filterPrice">
+        <label for="price_from">Precio</label>
+        <input type="number" name="price_from" placeholder="Desde" />
+        <input type="number" name="price_to" placeholder="Hasta" />
+      </div>
+      <div class="formbutton">
+        <button type="submit">Buscar</button>
+      </div>
+    </form>
+  </div>
 </div>
-
-
-
-
+<div class="propgrid">
+  {% for property in properties %}
+  <div class="propcard">
+    {% if property.image %}
+    <a href="/property/{{property.id}}">
+      <div class="propimage">
+        <img src="{{property.image.url}}" />
+      </div>
+    </a>
+    {% endif %}
+    <div class="propdata">
+      <div class="proptitle">{{property.title}}</div>
+      <div>
+        <div>
+          <i class="fas fa-map-marker-alt picolor"></i> {{property.address}} ,
+          {{property.city}}
+        </div>
+        <div>
+          <i class="fas fa-users picolor"></i> {{property.max_pax}} Personas
+        </div>
+      </div>
+      <div class="propprice">
+        <span class="price"
+          ><i class="fas fa-dollar-sign"></i>{{property.price}}</span
+        >
+        <span class="pdetail">por noche</span>
+      </div>
+    </div>
+    <a href="/property/{{property.id}}" class="button">Reservar</a>
+  </div>
+  {% endfor %}
+</div>
 
 {% endblock %}

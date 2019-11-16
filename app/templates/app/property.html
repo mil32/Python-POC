@@ -1,22 +1,41 @@
 {% extends "app/base.html" %} {% block content %}
-<h1>{{ property.title }}</h1>
-Capacidad: {{ property.max_pax }} personas.<br />
-Precio por noche: $ {{ property.price }}.<br />
-imagen: {{ property.image }}.<br />
-Ubicacion: {{ property.address }}. | {{ property.city }}<br />
-Descricion: {{ property.description }}<br />
+<div class="propheroimage">
+  <img src="{{property.image.url}}" />
+</div>
+<div class="container">
+  <span class="propbigtitle">{{ property.title }}</span>
+  <div class="pdescription">
+    {{ property.description }}
+  </div>
+  <i class="fas fa-map-marker-alt picolor"></i> {{ property.address }}. |
+  {{property.city }}<br />
+  <i class="fas fa-users picolor"></i> {{ property.max_pax }} personas.<br />
+  Precio por noche: $ {{ property.price }}.<br />
 
-<hr />
-<h3>Hace tu Reserva!</h3>
-<form action="" method="POST">
-  {% csrf_token %}
-  <input type="date" name="start_date" />
-  <input type="date" name="end_date" />
-  <input type="text" name="guest" placeholder="Nombre" />
-  <button type="submit">RESERVAR</button>
-</form>
-<hr />
+  <div class="bookform">
+    <h3>Hace tu Reserva!</h3>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <input type="date" name="start_date" required />
+      <input type="date" name="end_date" required />
+      <input type="text" name="guest" placeholder="Nombre" required />
+      <button type="submit">RESERVAR</button>
+    </form>
+  </div>
 
-{% if guest != none %}
-<h2>{{ guest }}</h2>
-{% endif %} {% endblock %}
+  {% if checker != None %}{% if checker %}
+  <div class="message success">
+    <p>
+      Felicitaciones {{ guest }} la reserva se realizo Exitosamente!
+    </p>
+  </div>
+  {% else %}
+  <div class="message fail">
+    <p>
+      Lo sentimos {{ guest }} la propiedad seleccionada no esta disponible en
+      ese rango de fechas
+    </p>
+  </div>
+  {% endif %} {% endif %}
+</div>
+{% endblock %}
