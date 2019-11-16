@@ -4,8 +4,8 @@
   <div class="searchForm">
     <form action="" class="formgrid" method="POST">
       {% csrf_token %}
-      <div id="filterCities">
-        <label for="cities">Ciudad: </label>
+      <div class="filterCities">
+        <i class="fas fa-map-marker-alt picolor"></i>
         <select name="cities" id="selectFilterCities">
           {% for city in cities %}
           <option value="{{city.id}}">{{city.name}}</option>
@@ -13,7 +13,8 @@
         </select>
       </div>
       <div class="filterCapacity">
-        <input
+        <i class="fas fa-users picolor"></i
+        ><input
           type="number"
           name="max_pax"
           style="width: 120px;"
@@ -22,7 +23,7 @@
       </div>
 
       <div class="filterPrice">
-        <label for="price_from">Precio</label>
+        <i class="fas fa-dollar-sign picolor"></i>
         <input type="number" name="price_from" placeholder="Desde" />
         <input type="number" name="price_to" placeholder="Hasta" />
       </div>

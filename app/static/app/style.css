@@ -45,9 +45,10 @@ nav a {
 
 .searchForm {
   background-color: white;
-  width: 60%;
+  width: 30%;
   padding: 10px;
   border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .propgrid {
@@ -172,18 +173,26 @@ a.button:hover {
   color: white;
   background-color: #0a38d7;
   width: 100%;
+  text-transform: uppercase;
 }
 .formbutton,
 .filterPrice {
   margin-top: 10px;
   grid-column: 1/-1;
 }
-
+.filterPrice input {
+  max-width: 150px;
+}
+.filterPrice,
+.filterCapacity,
+.filterCities {
+  justify-self: center;
+}
 .heroSearch input {
   font-size: 1.2em;
 }
 
 .formgrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 50% 50%;
 }
