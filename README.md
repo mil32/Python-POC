@@ -1,3 +1,3 @@
-Victor Yanez
+Victor Yañez
 Arian Provenzano
 Ezequiel Macchi Mallo
